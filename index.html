@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Bootstrap local -->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Trivia de Preguntas</h1>
         <div id="startContainer" class="text-center mt-5">
-            <div id="quiz"></div>
+            <div id="quiz" style="display: none;"></div>
             <div id="results"></div>
             <button id="startButton" class="btn btn-primary">Comenzar</button>
             <button id="submitButton" class="btn btn-primary" style="display: none;">Siguiente</button>
@@ -20,10 +21,9 @@
             <button id="retryButton" class="btn btn-primary" style="display: none;">Volver a intentar</button>
         </div>
     </div>
+    <!-- JavaScript de Bootstrap -->    
+    <script src="bootstrap.min.js"></script>
+    <!-- Código JavaScript de la trivia -->
+    <script src="quiz.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="quiz.js"></script>
-
 </html>

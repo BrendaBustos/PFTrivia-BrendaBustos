@@ -116,7 +116,7 @@ const retryButton = document.getElementById('retryButton');
 startButton.addEventListener('click', () => {
     nameJugador = prompt("Por favor, ingresa tu nombre para comenzar:");
     if (!nameJugador) {
-        alert("Debes ingresar un nombre para continuar.");
+        showMessage("Debes ingresar un nombre para continuar.");
         return;
     }
 
@@ -126,6 +126,12 @@ startButton.addEventListener('click', () => {
 
     showNextPreg();
 });
+
+function showMessage(message) {
+    const messageContainer = document.getElementById('message');
+    messageContainer.innerText = message;
+    messageContainer.style.display = 'block';
+}
 
 function showNextPreg() {
     const regular = trivia[regularPreg];
@@ -183,7 +189,7 @@ function showFinalResults() {
     showResultsButton.style.display = 'none';
     retryButton.style.display = 'block';
 
-    alert("Finalizar trivia");
+    showMessage("Finalizar trivia");
 
     const finalResults = `
         <h2>Resultados de la trivia</h2>
@@ -201,7 +207,7 @@ submitButton.addEventListener('click', () => {
     const acierto = respSelect[regularPreg];
 
     if (!acierto) {
-        alert("Por favor, selecciona una respuesta antes de continuar.");
+        showMessage("Por favor, selecciona una respuesta antes de continuar.");
         return;
     }
 
@@ -227,40 +233,3 @@ retryButton.addEventListener('click', () => {
     resultsContainer.innerHTML = '';
     showNextPreg();
 });
-
-showResultsButton.onclick = function () {
-    const scorePercentage = Math.round((respOk / trivia.length) * 100);
-
-    let output = ``;
-
-    trivia.forEach((preg, i) => {
-        const acierto = respSelect[i];
-        const result = acierto === preg.respOk;
-        const resultText = result ? 'Correcto!' : 'Incorrecto.';
-        const resultClass = result ? 'correct' : 'incorrect';
-        const resultSymbol = result ? '✔️' : '❌';
-        const detalle = result ? '' : `<div>${preg.detalle}</div>`;
-
-        output += `
-            <div class="preg">${i + 1}. ${preg.preg}</div>
-            <div class="ops-container">
-                <div class="${resultClass} result">${resultSymbol} ${resultText}</div>
-                ${detalle}
-            </div>
-        `;
-    });
-
-    output += `
-        <p>Nombre del jugador: ${nameJugador}</p>
-        <p>Puntaje: ${respOk} de ${trivia.length}</p>
-        <p>Puntaje final: ${scorePercentage}%</p>
-        <p>
-            <button id="showResultsButton">Mostrar resultados</button>
-        </p>
-    `;
-
-    resultsContainer.innerHTML = output;
-    submitButton.style.display = 'none';
-    showResultsButton.style.display = 'none';
-    retryButton.style.display = 'block';
-}

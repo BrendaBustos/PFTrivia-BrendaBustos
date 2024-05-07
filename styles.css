@@ -17,6 +17,7 @@ body {
 }
 
 .result {
+    padding-left: 200px;
     font-weight: bold;
 }
 
@@ -31,4 +32,6 @@ body {
 .explanation {
     margin-top: 10px;
 }
+
+
 
