@@ -113,7 +113,7 @@ const showResultsButton = document.getElementById('showResultsButton');
 const startButton = document.getElementById('startButton');
 const retryButton = document.getElementById('retryButton');
 
-startButton.onclick = function () {
+startButton.addEventListener('click', () => {
     nameJugador = prompt("Por favor, ingresa tu nombre para comenzar:");
     if (!nameJugador) {
         alert("Debes ingresar un nombre para continuar.");
@@ -125,7 +125,7 @@ startButton.onclick = function () {
     submitButton.style.display = 'block';
 
     showNextPreg();
-}
+});
 
 function showNextPreg() {
     const regular = trivia[regularPreg];
@@ -196,7 +196,7 @@ function showFinalResults() {
     resultsContainer.innerHTML = finalResults;
 }
 
-submitButton.onclick = function () {
+submitButton.addEventListener('click', () => {
     const regular = trivia[regularPreg];
     const acierto = respSelect[regularPreg];
 
@@ -216,9 +216,9 @@ submitButton.onclick = function () {
     } else {
         showFinalResults();
     }
-}
+});
 
-retryButton.onclick = function () {
+retryButton.addEventListener('click', () => {
     regularPreg = 0;
     respOk = 0;
     respSelect = [];
@@ -226,7 +226,7 @@ retryButton.onclick = function () {
     submitButton.style.display = 'block';
     resultsContainer.innerHTML = '';
     showNextPreg();
-}
+});
 
 showResultsButton.onclick = function () {
     const scorePercentage = Math.round((respOk / trivia.length) * 100);
