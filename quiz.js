@@ -2,133 +2,86 @@ let nameJugador;
 let regularPreg = 0;
 let respOk = 0;
 let respSelect = [];
-const trivia = [
-    {
-        preg: "¿Qué es más saludable para el corazón?",
-        ops: {
-            a: "Aceite de coco",
-            b: "Aceite de oliva",
-            c: "Aceite de palma"
-        },
-        respOk: "b",
-        detalle: "El aceite de oliva es una excelente opción para el corazón debido a su alto contenido de grasas monoinsaturadas y antioxidantes."
-    },
-    {
-        preg: "¿Cuál es una buena fuente de proteínas magras?",
-        ops: {
-            a: "Salchichas",
-            b: "Tofu",
-            c: "Bistec graso"
-        },
-        respOk: "b",
-        detalle: "El tofu es una excelente fuente de proteínas magras, y es una buena opción para las personas que desean reducir su ingesta de carnes rojas."
-    },
-    {
-        preg: "¿Cuál es la mejor manera de hidratarse?",
-        ops: {
-            a: "Café",
-            b: "Agua",
-            c: "Gaseosa"
-        },
-        respOk: "b",
-        detalle: "El agua es la mejor opción para hidratarse, ya que no tiene calorías y es esencial para el funcionamiento de nuestro cuerpo."
-    },
-    {
-        preg: "¿Cuál es una buena fuente de fibra?",
-        ops: {
-            a: "Arroz blanco",
-            b: "Arroz integral",
-            c: "Pastel"
-        },
-        respOk: "b",
-        detalle: "El arroz integral es una buena fuente de fibra, que ayuda a mantener la salud digestiva y puede reducir el riesgo de enfermedades cardíacas."
-    },
-    {
-        preg: "¿Cuál es una buena manera de mantener la salud mental?",
-        ops: {
-            a: "Hacer ejercicio",
-            b: "Dormir menos",
-            c: "Comer alimentos azucarados"
-        },
-        respOk: "a",
-        detalle: "Hacer ejercicio regularmente es una excelente manera de mantener la salud mental, ya que libera endorfinas que mejoran el estado de ánimo y reduce el estrés."
-    },
-    {
-        preg: "¿Cuál es una fuente de vitaminas y minerales?",
-        ops: {
-            a: "Comida chatarra",
-            b: "Frutas y verduras",
-            c: "Dulces"
-        },
-        respOk: "b",
-        detalle: "Las frutas y verduras son excelentes fuentes de vitaminas y minerales esenciales para la salud, como vitamina C, potasio y fibra."
-    },
-    {
-        preg: "¿Cuál es un buen sustituto del azúcar?",
-        ops: {
-            a: "Stevia",
-            b: "Jarabe de maíz",
-            c: "Miel"
-        },
-        respOk: "a",
-        detalle: "La stevia es un buen sustituto del azúcar, ya que es mucho más dulce y no afecta los niveles de azúcar en la sangre."
-    },
-    {
-        preg: "¿Cuál es una buena fuente de calcio?",
-        ops: {
-            a: "Leche",
-            b: "Soda",
-            c: "Galletas"
-        },
-        respOk: "a",
-        detalle: "La leche es una buena fuente de calcio, que es esencial para la salud de los huesos y los dientes."
-    },
-    {
-        preg: "¿Cuál es una buena fuente de vitamina D?",
-        ops: {
-            a: "Sol",
-            b: "Leche",
-            c: "Café"
-        },
-        respOk: "a",
-        detalle: "El sol es una excelente fuente de vitamina D, ya que el cuerpo puede producir esta vitamina cuando la piel está expuesta a la luz solar."
-    },
-    {
-        preg: "¿Cuál es una buena manera de mantener la salud mental?",
-        ops: {
-            a: "Tomar alcohol",
-            b: "Meditar",
-            c: "Mirar televisión"
-        },
-        respOk: "b",
-        detalle: "La meditación es una excelente manera de mantener la salud mental, ya que puede reducir el estrés y mejorar el estado de ánimo."
-    }
-];
-
+let trivia = [];
 
 const quizContainer = document.getElementById('quiz');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submitButton');
-const showResultsButton = document.getElementById('showResultsButton');
 const startButton = document.getElementById('startButton');
 const retryButton = document.getElementById('retryButton');
+const messageContainer = document.getElementById('message');
+const nameInputContainer = document.getElementById('nameInputContainer');
+const nameInput = document.getElementById('nameInput');
+
+// Cargar preguntas de trivia desde JSON
+fetch('./questions.json')
+    .then(response => response.json())
+    .then(data => {
+        trivia = data;
+        if (localStorage.getItem('nameJugador')) {
+            nameJugador = localStorage.getItem('nameJugador');
+            startButton.style.display = 'none';
+            nameInputContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            submitButton.style.display = 'block';
+            showNextPreg();
+        }
+    })
+    .catch(error => console.error('Error al cargar preguntas:', error));
 
 startButton.addEventListener('click', () => {
-    nameJugador = prompt("Por favor, ingresa tu nombre para comenzar:");
-    if (!nameJugador) {
+    const nameInputValue = nameInput.value.trim();
+    if (!nameInputValue) {
         showMessage("Debes ingresar un nombre para continuar.");
         return;
     }
 
+    nameJugador = nameInputValue;
+    localStorage.setItem('nameJugador', nameJugador);
+
     startButton.style.display = 'none';
+    nameInputContainer.style.display = 'none';
     quizContainer.style.display = 'block';
     submitButton.style.display = 'block';
 
     showNextPreg();
 });
 
+submitButton.addEventListener('click', () => {
+    const regular = trivia[regularPreg];
+    const acierto = respSelect[regularPreg];
+
+    if (!acierto) {
+        showMessage("Por favor, selecciona una respuesta antes de continuar.");
+        return;
+    }
+
+    if (regular.respOk === acierto) {
+        respOk++;
+    }
+
+    regularPreg++;
+
+    if (regularPreg < trivia.length) {
+        showNextPreg();
+    } else {
+        showFinalResults();
+    }
+});
+
+retryButton.addEventListener('click', () => {
+    regularPreg = 0;
+    respOk = 0;
+    respSelect = [];
+    localStorage.removeItem('nameJugador');
+    nameInputContainer.style.display = 'block';
+    nameInput.value = '';
+    quizContainer.style.display = 'none';
+    submitButton.style.display = 'none';
+    resultsContainer.innerHTML = '';
+});
+
 function showMessage(message) {
-    const messageContainer = document.getElementById('message');
     messageContainer.innerText = message;
     messageContainer.style.display = 'block';
 }
@@ -186,7 +139,6 @@ function showFinalResults() {
 
     resultsContainer.innerHTML = output;
     submitButton.style.display = 'none';
-    showResultsButton.style.display = 'none';
     retryButton.style.display = 'block';
 
     showMessage("Finalizar trivia");
@@ -201,35 +153,3 @@ function showFinalResults() {
     `;
     resultsContainer.innerHTML = finalResults;
 }
-
-submitButton.addEventListener('click', () => {
-    const regular = trivia[regularPreg];
-    const acierto = respSelect[regularPreg];
-
-    if (!acierto) {
-        showMessage("Por favor, selecciona una respuesta antes de continuar.");
-        return;
-    }
-
-    if (regular.respOk === acierto) {
-        respOk++;
-    }
-
-    regularPreg++;
-
-    if (regularPreg < trivia.length) {
-        showNextPreg();
-    } else {
-        showFinalResults();
-    }
-});
-
-retryButton.addEventListener('click', () => {
-    regularPreg = 0;
-    respOk = 0;
-    respSelect = [];
-    quizContainer.style.display = 'block';
-    submitButton.style.display = 'block';
-    resultsContainer.innerHTML = '';
-    showNextPreg();
-});

@@ -1,0 +1,102 @@
+[
+    {
+        "preg": "¿Qué es más saludable para el corazón?",
+        "ops": {
+            "a": "Aceite de coco",
+            "b": "Aceite de oliva",
+            "c": "Aceite de palma"
+        },
+        "respOk": "b",
+        "detalle": "El aceite de oliva es una excelente opción para el corazón debido a su alto contenido de grasas monoinsaturadas y antioxidantes."
+    },
+    {
+        "preg": "¿Cuál es una buena fuente de proteínas magras?",
+        "ops": {
+            "a": "Salchichas",
+            "b": "Tofu",
+            "c": "Bistec graso"
+        },
+        "respOk": "b",
+        "detalle": "El tofu es una excelente fuente de proteínas magras, y es una buena opción para las personas que desean reducir su ingesta de carnes rojas."
+    },
+    {
+        "preg": "¿Cuál es la mejor manera de hidratarse?",
+        "ops": {
+            "a": "Café",
+            "b": "Agua",
+            "c": "Gaseosa"
+        },
+        "respOk": "b",
+        "detalle": "El agua es la mejor opción para hidratarse, ya que no tiene calorías y es esencial para el funcionamiento de nuestro cuerpo."
+    },
+    {
+        "preg": "¿Cuál es una buena fuente de fibra?",
+        "ops": {
+            "a": "Arroz blanco",
+            "b": "Arroz integral",
+            "c": "Pastel"
+        },
+        "respOk": "b",
+        "detalle": "El arroz integral es una buena fuente de fibra, que ayuda a mantener la salud digestiva y puede reducir el riesgo de enfermedades cardíacas."
+    },
+    {
+        "preg": "¿Cuál es una buena manera de mantener la salud mental?",
+        "ops": {
+            "a": "Hacer ejercicio",
+            "b": "Dormir menos",
+            "c": "Comer alimentos azucarados"
+        },
+        "respOk": "a",
+        "detalle": "Hacer ejercicio regularmente es una excelente manera de mantener la salud mental, ya que libera endorfinas que mejoran el estado de ánimo y reduce el estrés."
+    },
+    {
+        "preg": "¿Cuál es una fuente de vitaminas y minerales?",
+        "ops": {
+            "a": "Comida chatarra",
+            "b": "Frutas y verduras",
+            "c": "Dulces"
+        },
+        "respOk": "b",
+        "detalle": "Las frutas y verduras son excelentes fuentes de vitaminas y minerales esenciales para la salud, como vitamina C, potasio y fibra."
+    },
+    {
+        "preg": "¿Cuál es un buen sustituto del azúcar?",
+        "ops": {
+            "a": "Stevia",
+            "b": "Jarabe de maíz",
+            "c": "Miel"
+        },
+        "respOk": "a",
+        "detalle": "La stevia es un buen sustituto del azúcar, ya que es mucho más dulce y no afecta los niveles de azúcar en la sangre."
+    },
+    {
+        "preg": "¿Cuál es una buena fuente de calcio?",
+        "ops": {
+            "a": "Leche",
+            "b": "Soda",
+            "c": "Galletas"
+        },
+        "respOk": "a",
+        "detalle": "La leche es una buena fuente de calcio, que es esencial para la salud de los huesos y los dientes."
+    },
+    {
+        "preg": "¿Cuál es una buena fuente de vitamina D?",
+        "ops": {
+            "a": "Sol",
+            "b": "Leche",
+            "c": "Café"
+        },
+        "respOk": "a",
+        "detalle": "El sol es una excelente fuente de vitamina D, ya que el cuerpo puede producir esta vitamina cuando la piel está expuesta a la luz solar."
+    },
+    {
+        "preg": "¿Cuál es una buena manera de mantener la salud mental?",
+        "ops": {
+            "a": "Tomar alcohol",
+            "b": "Meditar",
+            "c": "Mirar televisión"
+        },
+        "respOk": "b",
+        "detalle": "La meditación es una excelente manera de mantener la salud mental, ya que puede reducir el estrés y mejorar el estado de ánimo."
+    }
+]
